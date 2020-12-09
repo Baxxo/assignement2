@@ -206,4 +206,27 @@ public class TakeAwayBillTest {
             assertEquals("MASSIMO_NUMERO_ELEMENTI", e.getException());
         }
     }
+
+    @Test
+    public void orderLessThan10Item() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 2, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 2, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 2, 1, LocalTime.of(18, 18, 21)));
+
+        assertEquals(6.5, TakeAwayBill.getOrderPrice(l, u1), 0.001);
+    }
+
+    @Test
+    public void orderLessThan10ItemDiscount50Percent() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1.5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1.5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1.5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1.5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 1.5, 1, LocalTime.of(18, 18, 21)));
+
+        assertEquals(8.5, TakeAwayBill.getOrderPrice(l, u1), 0.001);
+    }
 }
