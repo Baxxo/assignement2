@@ -52,6 +52,10 @@ public interface TakeAwayBill {
             tot = Math.floor(tot * 100) / 100;
         }
 
+        if (tot <= 10) {
+            tot += 0.5;
+        }
+
         return tot;
     }
 
