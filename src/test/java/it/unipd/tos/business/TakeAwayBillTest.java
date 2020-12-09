@@ -231,9 +231,20 @@ public class TakeAwayBillTest {
     }
 
     @Test
-    public void giveAway10Order() throws RestaurantBillException {
+    public void notGiveAway() throws RestaurantBillException {
 
-        //GiveAwayFilter give = new GiveAwayFilter(new String[10]);
+        GiveAwayFilter.setup(new String[10]);
+
+        List<MenuItem> l1 = new ArrayList<MenuItem>();
+        l1.add(new MenuItem(ItemType.Budini, "coppa boby", 20, 1, LocalTime.of(18, 35, 21)));
+        assertEquals(20, TakeAwayBill.getOrderPrice(l1, u1), 0.001);
+
+    }
+
+    @Test
+    public void giveAway10Order() throws RestaurantBillException {
+        
+        GiveAwayFilter.setup(new String[10]);
 
         User u2 = new User("luca", "martini", "luca@martini.it", LocalDate.of(2010, 5, 4));
         User u3 = new User("gianni", "rodari", "gianni@rodari.it", LocalDate.of(2015, 7, 2));
@@ -298,6 +309,64 @@ public class TakeAwayBillTest {
         List<MenuItem> l13 = new ArrayList<MenuItem>();
         l13.add(new MenuItem(ItemType.Budini, "coppa boby", 20, 1, LocalTime.of(18, 50, 21)));
         assertEquals(20, TakeAwayBill.getOrderPrice(l13, u12), 0.001);
+
+    }
+
+    @Test
+    public void giveAway10OrderOf10Order() throws RestaurantBillException {
+
+        GiveAwayFilter.setup(new String[10]);
+
+        User u2 = new User("luca", "martini", "luca@martini.it", LocalDate.of(2010, 5, 4));
+        User u3 = new User("gianni", "rodari", "gianni@rodari.it", LocalDate.of(2015, 7, 2));
+        User u4 = new User("franco", "pasati", "franco@pasati.it", LocalDate.of(2016, 7, 2));
+        User u5 = new User("luigi", "righetti", "luigi@righetti.it", LocalDate.of(2017, 7, 2));
+        User u6 = new User("marco", "girondi", "marco@girondi.it", LocalDate.of(2002, 12, 31));
+        User u7 = new User("francesco", "girondi", "francesco@girondi.it", LocalDate.of(2010, 12, 31));
+        User u8 = new User("paolo", "girondi", "paolo@girondi.it", LocalDate.of(2003, 12, 31));
+        User u9 = new User("pino", "girondi", "pino@girondi.it", LocalDate.of(2004, 12, 31));
+        User u10 = new User("silvano", "girondi", "silvano@girondi.it", LocalDate.of(2005, 12, 31));
+        User u11 = new User("teresa", "girondi", "teresa@girondi.it", LocalDate.of(2006, 12, 31));
+
+        List<MenuItem> l2 = new ArrayList<MenuItem>();
+        l2.add(new MenuItem(ItemType.Bevande, "coppa ciao", 2, 2, LocalTime.of(18, 46, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l2, u2), 0.001);
+
+        List<MenuItem> l3 = new ArrayList<MenuItem>();
+        l3.add(new MenuItem(ItemType.Bevande, "coppa ciao", 2, 2, LocalTime.of(18, 46, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l3, u3), 0.001);
+
+        List<MenuItem> l4 = new ArrayList<MenuItem>();
+        l4.add(new MenuItem(ItemType.Budini, "coppa nafta", 4, 1, LocalTime.of(18, 58, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l4, u4), 0.001);
+
+        List<MenuItem> l5 = new ArrayList<MenuItem>();
+        l5.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 00, 10)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l5, u5), 0.001);
+
+        List<MenuItem> l6 = new ArrayList<MenuItem>();
+        l6.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 16, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l6, u6), 0.001);
+
+        List<MenuItem> l7 = new ArrayList<MenuItem>();
+        l7.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 25, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l7, u7), 0.001);
+
+        List<MenuItem> l8 = new ArrayList<MenuItem>();
+        l8.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 25, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l8, u8), 0.001);
+
+        List<MenuItem> l9 = new ArrayList<MenuItem>();
+        l9.add(new MenuItem(ItemType.Budini, "coppa boby", 20, 1, LocalTime.of(18, 35, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l9, u9), 0.001);
+
+        List<MenuItem> l10 = new ArrayList<MenuItem>();
+        l10.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 34, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l10, u10), 0.001);
+
+        List<MenuItem> l11 = new ArrayList<MenuItem>();
+        l11.add(new MenuItem(ItemType.Budini, "coppa boby", 20, 1, LocalTime.of(18, 50, 21)));
+        assertEquals(0, TakeAwayBill.getOrderPrice(l11, u11), 0.001);
 
     }
 }

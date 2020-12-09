@@ -20,7 +20,13 @@ public class GiveAwayFilter {
 
     static int totUser = 0;
 
-    public GiveAwayFilter(String[] userGift) {
+    GiveAwayFilter(String[] userGift) {
+        GiveAwayFilter.userGift = userGift;
+        totUser = 0;
+        totGift = 0;
+    }
+
+    static void setup(String[] userGift) {
         GiveAwayFilter.userGift = userGift;
         totUser = 0;
         totGift = 0;
