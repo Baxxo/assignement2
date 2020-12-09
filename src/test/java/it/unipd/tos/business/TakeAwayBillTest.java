@@ -176,6 +176,18 @@ public class TakeAwayBillTest {
     }
 
     @Test
+    public void orderMoreThan30ElementsOfOneType() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 40, LocalTime.of(18, 18, 21)));
+
+        try {
+            TakeAwayBill.getOrderPrice(l, u1);
+        } catch (RestaurantBillException e) {
+            assertEquals("MASSIMO_NUMERO_ELEMENTI", e.getException());
+        }
+    }
+
+    @Test
     public void orderMoreThan30ElementsWith2ElemtsOfOneItem() throws RestaurantBillException {
         List<MenuItem> l = new ArrayList<MenuItem>();
         for (int i = 0; i < 30; i++) {
