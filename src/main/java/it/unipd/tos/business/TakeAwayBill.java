@@ -12,13 +12,20 @@ import it.unipd.tos.model.MenuItem.ItemType;
 
 public interface TakeAwayBill {
 
+    static GiveAwayFilter give = new GiveAwayFilter(new String[10]);
+
     static double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws RestaurantBillException {
 
         if (itemsOrdered == null) {
             throw new RestaurantBillException("ORDINE_NULL");
         }
+
         if (itemsOrdered.isEmpty()) {
             throw new RestaurantBillException("ORDINE_VUOTO");
+        }
+
+        if (give.isGiftOrder(itemsOrdered, user)) {
+            return 0;
         }
 
         double tot = 0;
