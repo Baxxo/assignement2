@@ -160,4 +160,50 @@ public class TakeAwayBillTest {
 
         assertEquals(121.81, TakeAwayBill.getOrderPrice(l, u1), 0.001);
     }
+
+    @Test
+    public void orderMoreThan30Elements() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        for (int i = 0; i < 40; i++) {
+            l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 1, LocalTime.of(18, 18, 21)));
+        }
+
+        try {
+            TakeAwayBill.getOrderPrice(l, u1);
+        } catch (RestaurantBillException e) {
+            assertEquals("MASSIMO_NUMERO_ELEMENTI", e.getException());
+        }
+    }
+
+    @Test
+    public void orderMoreThan30ElementsOfOneType() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 40, LocalTime.of(18, 18, 21)));
+
+        try {
+            TakeAwayBill.getOrderPrice(l, u1);
+        } catch (RestaurantBillException e) {
+            assertEquals("MASSIMO_NUMERO_ELEMENTI", e.getException());
+        }
+    }
+
+    @Test
+    public void orderMoreThan30ElementsWith2ElemtsOfOneItem() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        for (int i = 0; i < 30; i++) {
+            l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 1, LocalTime.of(18, 18, 21)));
+        }
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 2, LocalTime.of(18, 18, 21)));
+
+        try {
+            TakeAwayBill.getOrderPrice(l, u1);
+        } catch (RestaurantBillException e) {
+            assertEquals("MASSIMO_NUMERO_ELEMENTI", e.getException());
+        }
+    }
 }
