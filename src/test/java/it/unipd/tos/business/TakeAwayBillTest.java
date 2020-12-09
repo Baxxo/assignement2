@@ -127,4 +127,19 @@ public class TakeAwayBillTest {
 
         assertEquals(TakeAwayBill.getOrderPrice(l, u1), 37, 0.001);
     }
+
+    @Test
+    public void tenPercentDiscountOverFiftyEuroOrder() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Budini, "coppa nafta", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa ciao", 15, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa boby", 8, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Budini, "coppa licky", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa caramello", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 10, 1, LocalTime.of(18, 18, 21)));
+
+        assertEquals(TakeAwayBill.getOrderPrice(l, u1), 111.81, 0.001);
+    }
 }

@@ -37,6 +37,11 @@ public interface TakeAwayBill {
             }
         }
 
+        if (tot >= 50) {
+            tot /= 1.1;
+            tot = Math.floor(tot * 100) / 100;
+        }
+
         if (ice_count > 5) {
             tot -= returnMinPrice(itemsOrdered) / 2;
         }
