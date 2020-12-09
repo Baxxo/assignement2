@@ -242,7 +242,7 @@ public class TakeAwayBillTest {
     }
 
     @Test
-    public void giveAway10Order() throws RestaurantBillException {
+    public void giveAwayMore10Order() throws RestaurantBillException {
         
         GiveAwayFilter.setup(new String[10]);
 
