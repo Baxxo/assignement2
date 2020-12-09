@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+
+<module name="Checker">
+    <module name="TreeWalker">
+        <module name="BooleanExpressionComplexity">
+            <property name="max" value="4"/>
+        </module>
+        <module name="CyclomaticComplexity">
+  			<property name="max" value="15"/>
+  		</module>
+        <module name="MethodLength"/>
+        <module name="EmptyCatchBlock"/>
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/>
+        <module name="NeedBraces"/>
+        <module name="LineLength">
+		  <property name="max" value="1200"/>
+		</module>
+    </module>
+
+    <module name="FileLength"/>
+    <module name="FileTabCharacter"/>
+
+	<module name="Header">
+		<property name="header" value="////////////////////////////////////////////////////////////////////\n// Matteo Basso 1227134\n////////////////////////////////////////////////////////////////////" />
+		<property name="fileExtensions" value="java" />
+	</module>
+
+</module>
