@@ -23,14 +23,14 @@ public class User {
     }
 
     public LocalDate getDate() throws RestaurantBillException {
-        if(date == null) {
+        if (date == null) {
             throw new RestaurantBillException("DATE_NULL");
         }
         return date;
     }
 
     public String getMail() throws RestaurantBillException {
-        if(mail == null) {
+        if (mail == null) {
             throw new RestaurantBillException("MAIL_NULL");
         }
         return mail;
