@@ -125,6 +125,39 @@ public class TakeAwayBillTest {
         l.add(new MenuItem(ItemType.Gelati, "coppa caramello", 5, 1, LocalTime.of(18, 18, 21)));
         l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 5, 1, LocalTime.of(18, 18, 21)));
 
-        assertEquals(TakeAwayBill.getOrderPrice(l, u1), 37, 0.001);
+        assertEquals(37, TakeAwayBill.getOrderPrice(l, u1), 0.001);
+    }
+
+    @Test
+    public void tenPercentDiscountOverFiftyEuroOrder() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Budini, "coppa nafta", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa ciao", 15, 2, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa boby", 8, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Budini, "coppa licky", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa caramello", 15, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 10, 1, LocalTime.of(18, 18, 21)));
+
+        assertEquals(111.81, TakeAwayBill.getOrderPrice(l, u1), 0.001);
+    }
+
+    @Test
+    public void tenPercentAndFiftyPercentDiscountOverFiftyEuroOrder() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 20, 1, LocalTime.of(18, 18, 21)));// 20
+        l.add(new MenuItem(ItemType.Budini, "coppa nafta", 15, 1, LocalTime.of(18, 18, 21)));// 15
+        l.add(new MenuItem(ItemType.Bevande, "coppa ciao", 15, 2, LocalTime.of(18, 18, 21)));// 30
+        l.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 18, 21)));// 10
+        l.add(new MenuItem(ItemType.Bevande, "coppa boby", 8, 1, LocalTime.of(18, 18, 21)));// 8
+        l.add(new MenuItem(ItemType.Budini, "coppa licky", 15, 1, LocalTime.of(18, 18, 21)));// 15
+        l.add(new MenuItem(ItemType.Bevande, "coppa caramello", 15, 1, LocalTime.of(18, 18, 21)));// 15
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 10, 1, LocalTime.of(18, 18, 21)));// 10
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 5, 1, LocalTime.of(18, 18, 21)));// 5
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 5, 1, LocalTime.of(18, 18, 21)));// 5
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 2, 1, LocalTime.of(18, 18, 21)));// 1
+
+        assertEquals(121.81, TakeAwayBill.getOrderPrice(l, u1), 0.001);
     }
 }

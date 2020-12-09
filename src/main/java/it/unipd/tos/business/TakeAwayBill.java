@@ -41,6 +41,11 @@ public interface TakeAwayBill {
             tot -= returnMinPrice(itemsOrdered) / 2;
         }
 
+        if (tot >= 50) {
+            tot /= 1.1;
+            tot = Math.floor(tot * 100) / 100;
+        }
+
         return tot;
     }
 
