@@ -22,6 +22,7 @@ public interface TakeAwayBill {
         }
 
         double tot = 0;
+        int count = 0;
         int ice_count = 0;
 
         for (MenuItem menuItem : itemsOrdered) {
@@ -35,6 +36,11 @@ public interface TakeAwayBill {
             if (menuItem.getItem().equals(ItemType.Gelati)) {
                 ice_count++;
             }
+            count += menuItem.getQuantity();
+        }
+
+        if (count > 30) {
+            throw new RestaurantBillException("MASSIMO_NUMERO_ELEMENTI");
         }
 
         if (ice_count > 5) {
