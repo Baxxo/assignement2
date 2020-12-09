@@ -8,6 +8,7 @@ import java.util.List;
 
 import it.unipd.tos.business.exception.RestaurantBillException;
 import it.unipd.tos.model.MenuItem;
+import it.unipd.tos.model.MenuItem.ItemType;
 
 public interface TakeAwayBill {
 
@@ -21,6 +22,7 @@ public interface TakeAwayBill {
         }
 
         double tot = 0;
+        int ice_count = 0;
 
         for (MenuItem menuItem : itemsOrdered) {
             if (menuItem.getPrice() < 0) {
@@ -29,8 +31,27 @@ public interface TakeAwayBill {
             if (menuItem.getQuantity() < 0) {
                 throw new RestaurantBillException("QUANTITA_NEGATIVA");
             }
+            tot += (menuItem.getPrice() * menuItem.getQuantity());
+            if (menuItem.getItem().equals(ItemType.Gelati)) {
+                ice_count++;
+            }
+        }
+
+        if (ice_count > 5) {
+            tot -= returnMinPrice(itemsOrdered) / 2;
         }
 
         return tot;
+    }
+
+    static double returnMinPrice(List<MenuItem> itemsOrdered) {
+
+        double min = itemsOrdered.get(0).getPrice();
+        for (MenuItem menuItem : itemsOrdered) {
+            if (menuItem.getPrice() < min) {
+                min = menuItem.getPrice();
+            }
+        }
+        return min;
     }
 }

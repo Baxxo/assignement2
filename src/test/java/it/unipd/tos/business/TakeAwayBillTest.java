@@ -112,4 +112,19 @@ public class TakeAwayBillTest {
             assertEquals("QUANTITA_NEGATIVA", e.getException());
         }
     }
+
+    @Test
+    public void getMoreThanFiveIcecream() throws RestaurantBillException {
+        List<MenuItem> l = new ArrayList<MenuItem>();
+        l.add(new MenuItem(ItemType.Gelati, "banana split", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Budini, "coppa nafta", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Bevande, "coppa ciao", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa billy", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa boby", 4, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa licky", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa caramello", 5, 1, LocalTime.of(18, 18, 21)));
+        l.add(new MenuItem(ItemType.Gelati, "coppa cioccolato", 5, 1, LocalTime.of(18, 18, 21)));
+
+        assertEquals(TakeAwayBill.getOrderPrice(l, u1), 37, 0.001);
+    }
 }
