@@ -50,7 +50,7 @@ public class TakeAwayBillTest {
         l.add(new MenuItem(ItemType.Gelati, "coppa billy", 10, 1, LocalTime.of(18, 18, 21)));
         l.add(new MenuItem(ItemType.Budini, "coppa boby", 20, 1, LocalTime.of(18, 18, 21)));
 
-        assertEquals(TakeAwayBill.getOrderPrice(l, u1), 0.001, 38);
+        assertEquals(TakeAwayBill.getOrderPrice(l, u1), 38, 0.001);
     }
 
     @Test
